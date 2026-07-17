@@ -2190,12 +2190,12 @@ img {
 
   /* Logo sizing on tablet */
   .logo-area img {
-    height: 42px !important;
-    max-width: 140px !important;
+    height: 46px !important;
+    max-width: 150px !important;
   }
 
   .logo-text {
-    font-size: 20px !important;
+    font-size: 22px !important;
   }
 
   /* Hero - stacked */
@@ -2310,12 +2310,12 @@ img {
   }
 
   .logo-area img {
-    height: 36px !important;
-    max-width: 120px !important;
+    height: 40px !important;
+    max-width: 130px !important;
   }
 
   .logo-text {
-    font-size: 17px !important;
+    font-size: 19px !important;
   }
 
   .hero-section {

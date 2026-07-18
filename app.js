@@ -87,7 +87,9 @@ function initActiveNavLink() {
   const navLinks = document.querySelectorAll('.nav-link');
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
-    if (href === page || (page === 'index.html' && href === '#') || (page === 'index.html' && href === './')) {
+    if (!href) return;
+    const baseHref = href.split('#')[0];
+    if (baseHref === page || (page === 'index.html' && (href === '#' || href === './'))) {
       link.classList.add('active');
     } else {
       link.classList.remove('active');

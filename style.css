@@ -516,7 +516,8 @@ img {
   flex-direction: column;
 }
 
-.metric-number {
+.metric-number,
+.metric-text {
   font-family: var(--font-heading);
   font-size: 32px;
   font-weight: 800;

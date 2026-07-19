@@ -235,6 +235,7 @@ img {
 .logo-text-wrapper {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
 }
 
 .logo-text {
@@ -257,10 +258,11 @@ img {
 .logo-tagline {
   font-size: 8px;
   font-weight: 700;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   color: var(--color-text-muted);
   text-transform: uppercase;
-  margin-top: -2px;
+  margin-top: 0px;
+  text-align: right;
 }
 
 /* Navigation Links */
@@ -2371,4 +2373,19 @@ img {
   .footer-saas-grid {
     gap: 24px;
   }
+}
+
+/* --- Loans Page Custom Card --- */
+.loans-card {
+  transition: all var(--transition-normal);
+}
+.loans-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.12) !important;
+}
+.loan-illustration {
+  transition: transform var(--transition-normal);
+}
+.loans-card:hover .loan-illustration {
+  transform: scale(1.03);
 }

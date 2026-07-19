@@ -77,7 +77,11 @@
       <div class="container"
         style="max-width: 800px; display: flex; justify-content: center; align-items: center; padding: 40px 0;">
         <div class="loans-card"
-          style="width: 100%; max-width: 440px; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-premium); background-color: var(--color-white); border: 1px solid var(--color-border); display: flex; flex-direction: column;">
+          style="width: 100%; max-width: 440px; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-premium); background-color: var(--color-white); border: 1px solid var(--color-border); display: flex; flex-direction: column; position: relative;">
+          <!-- COMING SOON Badge -->
+          <div style="position: absolute; top: 16px; left: 50%; transform: translateX(-50%); background-color: #F3E8FF; color: #6B21A8; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px; z-index: 10; border: 1px solid rgba(107, 33, 168, 0.15);">
+            Coming Soon
+          </div>
           <!-- SVG Illustration -->
           <svg class="loan-illustration" viewBox="0 0 200 120" width="100%" height="auto" fill="none" xmlns="http://www.w3.org/2000/svg" style="background: linear-gradient(135deg, #EEF2F6 0%, #D8E2ED 100%); display: block;">
             <defs>
@@ -155,9 +159,9 @@
              </div>
              
              <!-- Action Button -->
-             <a href="contact.html" class="btn btn-primary" style="margin-top: 8px; width: 100%; border-radius: 12px; padding: 14px; background: linear-gradient(135deg, var(--color-primary) 0%, #1D4ED8 100%); text-align: center; justify-content: center; font-weight: 700; box-shadow: 0 4px 14px rgba(37,99,235,0.25);">
-               Apply Now
-             </a>
+             <button class="btn" disabled style="margin-top: 8px; width: 100%; border-radius: 12px; padding: 14px; background: transparent; border: 2px solid #6B21A8; color: #6B21A8; text-align: center; justify-content: center; font-weight: 700; cursor: not-allowed; transition: none; box-shadow: none;">
+               Coming Soon
+             </button>
           </div>
         </div>
       </div>

@@ -77,11 +77,7 @@
       <div class="container"
         style="max-width: 800px; display: flex; justify-content: center; align-items: center; padding: 40px 0;">
         <div class="loans-card"
-          style="width: 100%; max-width: 440px; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-premium); background-color: var(--color-white); border: 1px solid var(--color-border); display: flex; flex-direction: column; position: relative;">
-          <!-- COMING SOON Badge -->
-          <div style="position: absolute; top: 16px; left: 50%; transform: translateX(-50%); background-color: #F3E8FF; color: #6B21A8; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px; z-index: 10; border: 1px solid rgba(107, 33, 168, 0.15);">
-            Coming Soon
-          </div>
+          style="width: 100%; max-width: 440px; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-premium); background-color: var(--color-white); border: 1px solid var(--color-border); display: flex; flex-direction: column;">
           <!-- SVG Illustration -->
           <svg class="loan-illustration" viewBox="0 0 200 120" width="100%" height="auto" fill="none" xmlns="http://www.w3.org/2000/svg" style="background: linear-gradient(135deg, #EEF2F6 0%, #D8E2ED 100%); display: block;">
             <defs>
@@ -159,8 +155,8 @@
              </div>
              
              <!-- Action Button -->
-             <button class="btn" disabled style="margin-top: 8px; width: 100%; border-radius: 12px; padding: 14px; background: transparent; border: 2px solid #6B21A8; color: #6B21A8; text-align: center; justify-content: center; font-weight: 700; cursor: not-allowed; transition: none; box-shadow: none;">
-               Coming Soon
+             <button id="open-loan-modal" class="btn btn-primary" style="margin-top: 8px; width: 100%; border-radius: 12px; padding: 14px; background: linear-gradient(135deg, var(--color-primary) 0%, #1D4ED8 100%); text-align: center; justify-content: center; font-weight: 700; box-shadow: 0 4px 14px rgba(37,99,235,0.25);">
+               Apply Now
              </button>
           </div>
         </div>
@@ -282,8 +278,128 @@
     </div>
   </footer>
 
+  <!-- Loan Application Modal -->
+  <div class="modal-overlay" id="loan-modal-overlay">
+    <div class="loan-modal">
+      <div class="modal-header">
+        <h3 class="modal-title">Lending NBFC Loan Application</h3>
+        <button class="modal-close" id="close-loan-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form class="loan-form" id="loan-requirement-form">
+          <div class="form-group">
+            <label for="client-name">Full Name *</label>
+            <input type="text" id="client-name" required placeholder="Enter your full name">
+          </div>
+          
+          <div class="form-group">
+            <label for="client-phone">WhatsApp Number *</label>
+            <input type="tel" id="client-phone" required placeholder="e.g. 9876543210">
+          </div>
+          
+          <div class="form-group">
+            <label for="client-email">Email Address *</label>
+            <input type="email" id="client-email" required placeholder="e.g. name@example.com">
+          </div>
+          
+          <div class="form-group">
+            <label for="loan-amount">Loan Amount Required (₹) *</label>
+            <input type="number" id="loan-amount" required placeholder="e.g. 500000">
+          </div>
+          
+          <div class="form-group">
+            <label for="loan-details">Loan Requirements & Details *</label>
+            <textarea id="loan-details" rows="4" required placeholder="Describe your loan requirements, property details, and business profile..."></textarea>
+          </div>
+          
+          <button type="submit" class="submit-btn">
+            Submit Application
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script src="app.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const openBtn = document.getElementById('open-loan-modal');
+      const closeBtn = document.getElementById('close-loan-modal');
+      const overlay = document.getElementById('loan-modal-overlay');
+      const form = document.getElementById('loan-requirement-form');
+
+      if (openBtn && closeBtn && overlay) {
+        openBtn.addEventListener('click', () => {
+          overlay.classList.add('active');
+          document.body.style.overflow = 'hidden'; // Disable page scrolling
+        });
+
+        const closeModal = () => {
+          overlay.classList.remove('active');
+          document.body.style.overflow = ''; // Restore page scrolling
+        };
+
+        closeBtn.addEventListener('click', closeModal);
+        overlay.addEventListener('click', (e) => {
+          if (e.target === overlay) {
+            closeModal();
+          }
+        });
+
+        // Form Submit Redirection Logic
+        if (form) {
+          form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Collect values
+            const name = document.getElementById('client-name').value.trim();
+            const phone = document.getElementById('client-phone').value.trim();
+            const email = document.getElementById('client-email').value.trim();
+            const amount = document.getElementById('loan-amount').value.trim();
+            const details = document.getElementById('loan-details').value.trim();
+
+            // Formulate message body
+            const emailSubject = `eSaleAgreement Loan Requirement - ${name}`;
+            const messageBody = `Lending NBFC Loan Application details:
+
+Full Name: ${name}
+WhatsApp Number: ${phone}
+Email Address: ${email}
+Loan Amount Required: INR ${amount}
+Loan Requirements & Details:
+${details}`;
+
+            // 1. Trigger Mailto redirect to Support@esaleagreement.com
+            const mailtoUrl = `mailto:Support@esaleagreement.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(messageBody)}`;
+            
+            // Open mailto link
+            window.location.href = mailtoUrl;
+
+            // 2. Format WhatsApp redirect to +91 8639833447
+            const whatsappText = `Hello eSaleAgreement, I would like to submit my Lending NBFC loan requirements.
+
+*Full Name:* ${name}
+*WhatsApp Number:* ${phone}
+*Email Address:* ${email}
+*Loan Amount Required:* INR ${amount}
+*Loan Requirements & Details:*
+${details}`;
+
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=918639833447&text=${encodeURIComponent(whatsappText)}`;
+
+            // Open WhatsApp in a new tab after a brief delay
+            setTimeout(() => {
+              window.open(whatsappUrl, '_blank');
+              closeModal();
+              form.reset();
+            }, 800);
+          });
+        }
+      }
+    });
+  </script>
 </body>
 
 </html>

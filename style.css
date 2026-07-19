@@ -217,7 +217,7 @@ img {
 .logo-area {
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: 0;
   flex-shrink: 0;
 }
 
@@ -228,8 +228,8 @@ img {
   object-fit: contain !important;
   border: none !important;
   box-shadow: none !important;
-  margin-right: -10px;
-  margin-left: -5px;
+  margin-right: -22px;
+  margin-left: -8px;
 }
 
 .logo-text-wrapper {
@@ -736,7 +736,7 @@ img {
     height: 35px !important;
   }
   .logo-area {
-    gap: 3px;
+    gap: 0;
   }
 
   .menu-toggle {
@@ -819,7 +819,7 @@ img {
     height: 30px !important;
   }
   .logo-area {
-    gap: 3px;
+    gap: 0;
   }
 }
 

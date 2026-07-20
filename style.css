@@ -217,25 +217,32 @@ img {
 .logo-area {
   display: flex;
   align-items: center;
-  gap: 0;
+  gap: 8px;
   flex-shrink: 0;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.logo-area:hover {
+  opacity: 0.92;
 }
 
 .logo-area img {
-  height: 48px !important;
+  height: 42px !important;
   width: auto !important;
   max-width: 160px !important;
   object-fit: contain !important;
   border: none !important;
   box-shadow: none !important;
-  margin-right: -22px;
-  margin-left: -8px;
+  margin: 0 !important;
 }
 
 .logo-text-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
+  justify-content: center;
+  line-height: 1.1;
 }
 
 .logo-text {
@@ -258,11 +265,11 @@ img {
 .logo-tagline {
   font-size: 8px;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
   color: var(--color-text-muted);
   text-transform: uppercase;
-  margin-top: 0px;
-  text-align: right;
+  margin-top: 1px;
+  text-align: left;
 }
 
 /* Navigation Links */
@@ -732,13 +739,14 @@ img {
 
   /* Scale down Logo and Brand name on mobile to prevent collision */
   .logo-text {
-    font-size: 18px !important;
+    font-size: 19px !important;
   }
   .logo-area img {
-    height: 35px !important;
+    height: 36px !important;
+    margin: 0 !important;
   }
   .logo-area {
-    gap: 0;
+    gap: 6px;
   }
 
   .menu-toggle {
@@ -815,13 +823,14 @@ img {
 /* Extra small mobile adjustments for logo sizing */
 @media (max-width: 400px) {
   .logo-text {
-    font-size: 15px !important;
+    font-size: 16px !important;
   }
   .logo-area img {
-    height: 30px !important;
+    height: 32px !important;
+    margin: 0 !important;
   }
   .logo-area {
-    gap: 0;
+    gap: 5px;
   }
 }
 
@@ -2197,12 +2206,13 @@ img {
 
   /* Logo sizing on tablet */
   .logo-area img {
-    height: 46px !important;
+    height: 38px !important;
     max-width: 150px !important;
+    margin: 0 !important;
   }
 
   .logo-text {
-    font-size: 22px !important;
+    font-size: 21px !important;
   }
 
   /* Hero - stacked */
@@ -2332,12 +2342,13 @@ img {
   }
 
   .logo-area img {
-    height: 40px !important;
+    height: 34px !important;
     max-width: 130px !important;
+    margin: 0 !important;
   }
 
   .logo-text {
-    font-size: 19px !important;
+    font-size: 18px !important;
   }
 
   .hero-section {

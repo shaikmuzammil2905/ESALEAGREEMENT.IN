@@ -2921,23 +2921,40 @@ img {
 
   .app-download-content {
     align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .app-badge-pill {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .app-download-title {
+    text-align: center;
+    width: 100%;
   }
 
   .app-download-subtitle {
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
   }
 
   .app-features-list {
     max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .store-buttons-wrapper {
     justify-content: center;
+    width: 100%;
   }
 
   .app-ratings-bar {
     justify-content: center;
+    width: 100%;
   }
 
   .app-banner-compact {

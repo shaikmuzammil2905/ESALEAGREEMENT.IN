@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCardHoverEffect();
   initFaqAccordion();
   initContactFormValidation();
+  initAppDownloadInteractions();
 });
 
 /**
@@ -207,7 +208,9 @@ function initScrollReveal() {
     ...document.querySelectorAll('.section-header'),
     ...document.querySelectorAll('.contact-info-item'),
     document.querySelector('.contact-form-card'),
-    document.querySelector('.comparison-table-wrapper')
+    document.querySelector('.comparison-table-wrapper'),
+    document.querySelector('.app-download-section'),
+    document.querySelector('.app-banner-compact')
   ].filter(Boolean);
 
   otherReveals.forEach(el => el.classList.add('reveal-slide-up'));
@@ -229,6 +232,39 @@ function initScrollReveal() {
 
   const items = document.querySelectorAll('.reveal-slide-up, .reveal-fade-in, .reveal-zoom-in');
   items.forEach(el => revealObserver.observe(el));
+}
+
+/**
+ * Mobile App Section Interactive Effects
+ */
+function initAppDownloadInteractions() {
+  const storeBtns = document.querySelectorAll('.store-btn');
+  storeBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      // Optional analytics or notification toast can go here
+      const storeName = btn.classList.contains('google-play-btn') ? 'Google Play' : 'App Store';
+      console.log(`Redirecting to eSaleAgreement ${storeName} listing...`);
+    });
+  });
+
+  const phoneMockup = document.querySelector('.app-phone-mockup');
+  if (phoneMockup && window.innerWidth > 992) {
+    document.addEventListener('mousemove', (e) => {
+      const rect = phoneMockup.getBoundingClientRect();
+      if (
+        e.clientX >= rect.left - 100 &&
+        e.clientX <= rect.right + 100 &&
+        e.clientY >= rect.top - 100 &&
+        e.clientY <= rect.bottom + 100
+      ) {
+        const xVal = (e.clientX - (rect.left + rect.width / 2)) / 30;
+        const yVal = (e.clientY - (rect.top + rect.height / 2)) / 30;
+        phoneMockup.style.transform = `perspective(1000px) rotateY(${xVal}deg) rotateX(${-yVal}deg) translateY(-5px)`;
+      } else {
+        phoneMockup.style.transform = '';
+      }
+    });
+  }
 }
 
 /**

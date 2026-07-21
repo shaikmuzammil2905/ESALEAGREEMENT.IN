@@ -2971,10 +2971,10 @@ img {
 
 .phone-front-image-card img {
   width: calc(100% + 12px); /* Shift bounds to hide right black line */
-  height: calc(100% + 6px);  /* Shift bounds to hide top-left blue dot */
+  height: 100%; /* Exact container height to prevent any vertical cropping */
   object-fit: cover;
-  margin-left: -6px; /* Crops out the right vertical line without cutting off the person's back */
-  margin-top: -2px;  /* Minimal offset to preserve head height completely */
+  margin-left: -6px; /* Crops out the right vertical line and left blue dot without cutting off the person's back */
+  margin-top: 0; /* No top shift, ensuring complete heads and hair are visible */
   border-radius: 0;
 }
 

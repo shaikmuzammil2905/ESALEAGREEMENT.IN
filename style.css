@@ -2969,12 +2969,38 @@ img {
   position: relative;
 }
 
+/* White cover mask to hide the top-left blue dot artifact */
+.phone-front-image-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 25px;
+  height: 25px;
+  background: #ffffff;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* White cover mask to hide the right-edge vertical line artifact */
+.phone-front-image-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 12px;
+  height: 100%;
+  background: #ffffff;
+  z-index: 2;
+  pointer-events: none;
+}
+
 .phone-front-image-card img {
-  width: calc(100% + 8px); /* Symmetric horizontal crop margin */
-  height: 100%; /* No vertical crop to preserve head and hair fully */
-  object-fit: cover;
-  margin-left: -4px; /* Centered shift to keep both persons balanced and fully visible on screen */
-  margin-top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Displays full illustration without any cropping of heads, hair, or bodies */
+  position: relative;
+  z-index: 1;
   border-radius: 0;
 }
 

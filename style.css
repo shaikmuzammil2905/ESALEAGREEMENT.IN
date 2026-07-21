@@ -2965,16 +2965,16 @@ img {
   border: 1px solid #edf2f7;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   overflow: hidden;
-  height: 145px; /* Keeps both persons shaking hands fully visible on screen */
+  height: 155px; /* Keeps both persons shaking hands and their heads fully visible on screen */
   position: relative;
 }
 
 .phone-front-image-card img {
   width: calc(100% + 12px); /* Shift bounds to hide right black line */
-  height: calc(100% + 8px);  /* Shift bounds to hide top-left blue dot */
+  height: calc(100% + 6px);  /* Shift bounds to hide top-left blue dot */
   object-fit: cover;
-  margin-left: -6px; /* Crops out the right vertical line without zooming/cutting off the person's back */
-  margin-top: -4px;  /* Crops out the top-left blue dot */
+  margin-left: -6px; /* Crops out the right vertical line without cutting off the person's back */
+  margin-top: -2px;  /* Minimal offset to preserve head height completely */
   border-radius: 0;
 }
 

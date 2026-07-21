@@ -2956,7 +2956,7 @@ img {
 
 .phone-front-image-card {
   width: 100%;
-  background: #f8fafc;
+  background: #ffffff;
   border-radius: 16px;
   padding: 0;
   display: flex;
@@ -2965,14 +2965,16 @@ img {
   border: 1px solid #edf2f7;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   overflow: hidden;
-  height: 145px; /* Increased height to match image 1.38 aspect ratio, keeping both persons shaking hands fully visible */
+  height: 145px; /* Keeps both persons shaking hands fully visible on screen */
+  position: relative;
 }
 
 .phone-front-image-card img {
-  width: 104%; /* Crop only slightly on sides */
-  height: 104%; /* Crop only slightly on vertical */
+  width: calc(100% + 12px); /* Shift bounds to hide right black line */
+  height: calc(100% + 8px);  /* Shift bounds to hide top-left blue dot */
   object-fit: cover;
-  transform: scale(1.04); /* Moderate zoom to crop only the left blue arc and right line artifacts while keeping both persons fully visible */
+  margin-left: -6px; /* Crops out the right vertical line without zooming/cutting off the person's back */
+  margin-top: -4px;  /* Crops out the top-left blue dot */
   border-radius: 0;
 }
 

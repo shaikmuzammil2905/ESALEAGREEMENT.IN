@@ -266,16 +266,16 @@ img {
 .logo-tagline {
   font-size: 8.5px;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 1.1px;
   color: var(--color-text-muted);
   text-transform: uppercase;
   margin-top: 1px;
-  text-align: left;
+  text-align: right;
   display: block;
   width: 100%;
-  align-self: flex-start;
-  margin-left: 14px; /* Shift tagline to align perfectly under the green 'SaleAgreement' text */
-  padding-left: 0;
+  align-self: flex-end;
+  margin-left: auto;
+  padding-right: 2px;
 }
 
 /* Navigation Links */
@@ -2958,22 +2958,22 @@ img {
   width: 100%;
   background: #f8fafc;
   border-radius: 16px;
-  padding: 0; /* Remove padding to enable crop bounds */
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid #edf2f7;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-  overflow: hidden; /* Hide cropped image parts */
-  height: 105px; /* Set a clean fixed height aspect ratio */
+  overflow: hidden;
+  height: 145px; /* Increased height to match image 1.38 aspect ratio, keeping both persons shaking hands fully visible */
 }
 
 .phone-front-image-card img {
-  width: 108%; /* Wider to crop side artifacts */
-  height: 108%; /* Taller to crop vertical artifacts */
+  width: 104%; /* Crop only slightly on sides */
+  height: 104%; /* Crop only slightly on vertical */
   object-fit: cover;
-  transform: scale(1.08); /* Zoom slightly to cut out left blue arc and right black border line */
-  border-radius: 0; /* Handled by container overflow */
+  transform: scale(1.04); /* Moderate zoom to crop only the left blue arc and right line artifacts while keeping both persons fully visible */
+  border-radius: 0;
 }
 
 .phone-front-content {

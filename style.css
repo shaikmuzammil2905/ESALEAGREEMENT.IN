@@ -217,10 +217,11 @@ img {
 .logo-area {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 3px;
   flex-shrink: 0;
   text-decoration: none;
   transition: opacity 0.2s ease, transform 0.2s ease;
+  margin-right: 36px;
 }
 
 .logo-area:hover {
@@ -2765,133 +2766,301 @@ img {
   gap: 2px;
 }
 
-/* Smartphone App Visual Showcase */
+/* Smartphone App Visual Showcase - Animated Dual Smartphone Mockup (image copy 37 style) */
 .app-visual-wrapper {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
-.app-phone-mockup {
-  width: 290px;
-  background: #1E293B;
-  border: 10px solid #334155;
-  border-radius: 40px;
-  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 40px rgba(37, 99, 235, 0.2);
-  padding: 16px;
+.dual-mockup-container {
   position: relative;
+  width: 100%;
+  max-width: 440px;
+  height: 520px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Background Smartphone */
+.phone-mockup-back {
+  position: absolute;
+  width: 250px;
+  height: 440px;
+  right: 10px;
+  top: 40px;
+  background: #090e1a;
+  border: 4px solid #3b82f6;
+  border-radius: 38px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(59, 130, 246, 0.3);
+  z-index: 1;
+  padding: 10px;
   overflow: hidden;
+  animation: floatPhoneBack 5s ease-in-out infinite alternate;
   transition: transform 0.4s ease;
 }
 
-.app-phone-mockup:hover {
-  transform: translateY(-8px) rotate(-1deg);
-}
-
-.app-phone-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: 14px;
-}
-
-.app-phone-speaker {
-  width: 60px;
-  height: 4px;
-  background: #475569;
-  border-radius: 4px;
-  margin: 0 auto;
+/* Front Smartphone */
+.phone-mockup-front {
   position: absolute;
-  top: 8px;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 275px;
+  height: 480px;
+  left: 10px;
+  top: 0;
+  background: #090e1a;
+  border: 4px solid #3b82f6;
+  border-radius: 40px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(59, 130, 246, 0.4);
+  z-index: 2;
+  padding: 10px;
+  overflow: hidden;
+  animation: floatPhoneFront 5s ease-in-out infinite alternate;
+  transition: transform 0.4s ease;
 }
 
-.app-phone-logo {
-  font-family: var(--font-heading);
-  font-size: 14px;
-  font-weight: 700;
-  color: #FFFFFF;
+.dual-mockup-container:hover .phone-mockup-front {
+  transform: translateY(-8px) scale(1.02);
 }
 
-.app-phone-screen {
-  background: #0F172A;
-  border-radius: 20px;
-  padding: 16px;
+.dual-mockup-container:hover .phone-mockup-back {
+  transform: translateY(8px) scale(0.98);
+}
+
+/* Animations for Phones */
+@keyframes floatPhoneFront {
+  0% {
+    transform: translateY(0px) rotate(-1deg);
+  }
+  100% {
+    transform: translateY(-14px) rotate(1deg);
+  }
+}
+
+@keyframes floatPhoneBack {
+  0% {
+    transform: translateY(0px) rotate(1.5deg);
+  }
+  100% {
+    transform: translateY(12px) rotate(-0.5deg);
+  }
+}
+
+/* Back Phone Screen Content */
+.phone-back-screen {
+  background: #ffffff;
+  height: 100%;
+  border-radius: 28px;
+  padding: 24px 14px 14px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  opacity: 0.92;
 }
 
-.app-card-preview {
-  background: rgba(30, 41, 59, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 12px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.app-card-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: var(--color-primary);
-  color: #FFFFFF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.app-card-info h5 {
+.phone-back-header {
+  font-family: var(--font-heading);
   font-size: 13px;
   font-weight: 700;
-  color: #FFFFFF;
-  margin-bottom: 2px;
+  color: #1e293b;
+  margin-bottom: 4px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e2e8f0;
 }
 
-.app-card-info p {
+.phone-back-step {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
   font-size: 11px;
-  color: #10B981;
   font-weight: 600;
+  color: #334155;
 }
 
-.floating-badge {
-  position: absolute;
-  background: rgba(15, 23, 42, 0.95);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 10px 16px;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+.phone-back-step .status-check {
+  color: #10b981;
+  background: #dcfce7;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Front Phone Screen Content */
+.phone-front-screen {
+  background: #ffffff;
+  height: 100%;
+  border-radius: 30px;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.03);
+}
+
+.phone-front-header {
   display: flex;
   align-items: center;
-  gap: 10px;
+  width: 100%;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.phone-front-back-btn {
+  color: #64748b;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.phone-front-logo-img {
+  width: 22px !important;
+  height: 22px !important;
+  object-fit: contain !important;
+  margin: 0 !important;
+}
+
+.phone-front-header-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.phone-front-header-text .title {
   font-size: 12px;
+  font-weight: 800;
+  color: #0f172a;
+  font-family: var(--font-heading);
+}
+
+.phone-front-header-text .subtitle {
+  font-size: 8px;
+  color: #0284c7;
   font-weight: 600;
-  color: #FFFFFF;
-  animation: float-badge 3s ease-in-out infinite alternate;
 }
 
-.floating-badge-1 {
-  top: 20px;
-  left: -20px;
+.phone-front-image-card {
+  width: 100%;
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #edf2f7;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
-.floating-badge-2 {
-  bottom: 30px;
-  right: -20px;
-  animation-delay: 1.5s;
+.phone-front-image-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
 }
 
-@keyframes float-badge {
-  0% { transform: translateY(0px); }
-  100% { transform: translateY(-8px); }
+.phone-front-content {
+  text-align: center;
+  margin-top: 12px;
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.phone-front-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 4px;
+  font-family: var(--font-heading);
+}
+
+.phone-front-desc {
+  font-size: 9px;
+  color: #475569;
+  line-height: 1.45;
+  margin-bottom: 8px;
+  padding: 0 4px;
+}
+
+.phone-front-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.phone-front-tag {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  transition: transform 0.2s ease;
+}
+
+.phone-front-tag:hover {
+  transform: translateY(-2px);
+}
+
+.phone-front-tag.tamper {
+  background: #eff6ff;
+  color: #1e40af;
+  border: 1px solid #dbeafe;
+}
+
+.phone-front-tag.draft {
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #ffedd5;
+}
+
+.phone-front-tag.valid {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #dcfce7;
+}
+
+.phone-front-action-badge {
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid #bbf7d0;
+  animation: pulseBadge 2.5s ease-in-out infinite alternate;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+@keyframes pulseBadge {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.15);
+  }
+  100% {
+    transform: scale(1.06);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+  }
 }
 
 /* Secondary Page App Download Banner (Compact Version) */

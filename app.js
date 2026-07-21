@@ -247,22 +247,26 @@ function initAppDownloadInteractions() {
     });
   });
 
-  const phoneMockup = document.querySelector('.app-phone-mockup');
-  if (phoneMockup && window.innerWidth > 992) {
-    document.addEventListener('mousemove', (e) => {
-      const rect = phoneMockup.getBoundingClientRect();
-      if (
-        e.clientX >= rect.left - 100 &&
-        e.clientX <= rect.right + 100 &&
-        e.clientY >= rect.top - 100 &&
-        e.clientY <= rect.bottom + 100
-      ) {
-        const xVal = (e.clientX - (rect.left + rect.width / 2)) / 30;
-        const yVal = (e.clientY - (rect.top + rect.height / 2)) / 30;
-        phoneMockup.style.transform = `perspective(1000px) rotateY(${xVal}deg) rotateX(${-yVal}deg) translateY(-5px)`;
-      } else {
-        phoneMockup.style.transform = '';
-      }
+  const phoneBack = document.querySelector('.phone-mockup-back');
+  const phoneFront = document.querySelector('.phone-mockup-front');
+
+  if (phoneBack && phoneFront) {
+    phoneBack.addEventListener('click', (e) => {
+      e.stopPropagation();
+      phoneBack.classList.add('active-front');
+      phoneFront.classList.add('active-back');
+    });
+
+    phoneFront.addEventListener('click', (e) => {
+      e.stopPropagation();
+      phoneBack.classList.remove('active-front');
+      phoneFront.classList.remove('active-back');
+    });
+
+    // Reset when clicking outside
+    document.addEventListener('click', () => {
+      phoneBack.classList.remove('active-front');
+      phoneFront.classList.remove('active-back');
     });
   }
 }

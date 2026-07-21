@@ -274,7 +274,7 @@ img {
   display: block;
   width: 100%;
   align-self: flex-start;
-  margin-left: 0;
+  margin-left: 14px; /* Shift tagline to align perfectly under the green 'SaleAgreement' text */
   padding-left: 0;
 }
 
@@ -2958,19 +2958,22 @@ img {
   width: 100%;
   background: #f8fafc;
   border-radius: 16px;
-  padding: 8px;
+  padding: 0; /* Remove padding to enable crop bounds */
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid #edf2f7;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  overflow: hidden; /* Hide cropped image parts */
+  height: 105px; /* Set a clean fixed height aspect ratio */
 }
 
 .phone-front-image-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
+  width: 108%; /* Wider to crop side artifacts */
+  height: 108%; /* Taller to crop vertical artifacts */
   object-fit: cover;
+  transform: scale(1.08); /* Zoom slightly to cut out left blue arc and right black border line */
+  border-radius: 0; /* Handled by container overflow */
 }
 
 .phone-front-content {
@@ -3175,4 +3178,17 @@ img {
   .floating-badge {
     display: none;
   }
+}
+
+/* Interactive swapping active states for Dual phone mockups */
+.phone-mockup-back.active-front {
+  z-index: 10 !important;
+  transform: translateX(-40px) scale(1.05) rotate(0deg) !important;
+  animation: none !important;
+}
+
+.phone-mockup-front.active-back {
+  z-index: 1 !important;
+  transform: translateX(40px) scale(0.9) rotate(2deg) !important;
+  animation: none !important;
 }

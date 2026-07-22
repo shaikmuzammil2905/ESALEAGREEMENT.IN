@@ -266,6 +266,15 @@ img {
   line-height: 1;
 }
 
+/* Footer TM Contrast Color */
+.saas-footer .logo-img-container::after {
+  color: #ffffff !important;
+}
+
+.saas-footer .logo-text-tm {
+  color: #ffffff !important;
+}
+
 .logo-text-wrapper {
   display: flex;
   flex-direction: column;
@@ -2945,7 +2954,7 @@ img {
   display: flex;
   align-items: center;
   width: 100%;
-  gap: 8px;
+  gap: 3px;
   margin-bottom: 10px;
 }
 
@@ -2953,6 +2962,34 @@ img {
   color: #64748b;
   font-weight: 700;
   font-size: 16px;
+  line-height: 1;
+}
+
+/* Phone Mockup Logo TM Styling */
+.phone-front-logo-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.phone-front-logo-container::after {
+  content: "TM";
+  position: absolute;
+  top: 1px;
+  right: -4px;
+  font-size: 4px;
+  font-weight: 900;
+  color: #000000;
+  line-height: 1;
+}
+
+.phone-front-logo-tm {
+  font-size: 4px;
+  font-weight: 900;
+  color: #000000;
+  vertical-align: super;
+  margin-left: 1px;
+  display: inline-block;
   line-height: 1;
 }
 

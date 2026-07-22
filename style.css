@@ -251,15 +251,15 @@ img {
   top: 1px;
   right: -5px;
   font-size: 7px;
-  font-weight: 800;
-  color: var(--color-primary);
+  font-weight: 900;
+  color: #000000;
   line-height: 1;
 }
 
 .logo-text-tm {
   font-size: 7px;
-  font-weight: 800;
-  color: var(--color-accent);
+  font-weight: 900;
+  color: #000000;
   vertical-align: super;
   margin-left: 2px;
   display: inline-block;

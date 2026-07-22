@@ -238,6 +238,34 @@ img {
   margin: 0 !important;
 }
 
+/* Logo TM Styling */
+.logo-img-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.logo-img-container::after {
+  content: "TM";
+  position: absolute;
+  top: 1px;
+  right: -5px;
+  font-size: 7px;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.logo-text-tm {
+  font-size: 7px;
+  font-weight: 800;
+  color: var(--color-accent);
+  vertical-align: super;
+  margin-left: 2px;
+  display: inline-block;
+  line-height: 1;
+}
+
 .logo-text-wrapper {
   display: flex;
   flex-direction: column;

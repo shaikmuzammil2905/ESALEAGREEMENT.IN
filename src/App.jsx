@@ -16,6 +16,7 @@ import FAQsManager from './admin/faqs/FAQsManager';
 import PricingManager from './admin/pricing/PricingManager';
 import ContactRequestsManager from './admin/contact-requests/ContactRequestsManager';
 import WebsiteCMS from './admin/website-content/WebsiteCMS';
+import NavigationManager from './admin/navigation/NavigationManager';
 import MediaManager from './admin/media/MediaManager';
 import SettingsManager from './admin/settings/SettingsManager';
 import AdminProfile from './admin/profile/AdminProfile';
@@ -48,6 +49,7 @@ export default function App() {
             <Route path="pricing" element={<PricingManager />} />
             <Route path="contact-requests" element={<ContactRequestsManager />} />
             <Route path="website-content" element={<WebsiteCMS />} />
+            <Route path="navigation" element={<NavigationManager />} />
             <Route path="media" element={<MediaManager />} />
             <Route path="settings" element={<SettingsManager />} />
             <Route path="profile" element={<AdminProfile />} />

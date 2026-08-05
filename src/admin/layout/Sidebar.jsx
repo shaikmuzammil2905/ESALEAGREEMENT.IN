@@ -17,7 +17,8 @@ import {
   ChevronLeft,
   ChevronRight,
   ShieldCheck,
-  ExternalLink
+  ExternalLink,
+  Navigation
 } from 'lucide-react';
 
 export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobileOpen }) {
@@ -31,6 +32,7 @@ export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobile
     { name: 'Pricing Plans', path: '/admin/pricing', icon: CreditCard },
     { name: 'Contact Requests', path: '/admin/contact-requests', icon: Mail },
     { name: 'Website Content', path: '/admin/website-content', icon: Globe },
+    { name: 'Navigation Manager', path: '/admin/navigation', icon: Navigation },
     { name: 'Media Manager', path: '/admin/media', icon: ImageIcon },
     { name: 'Settings', path: '/admin/settings', icon: Settings },
     { name: 'Admin Profile', path: '/admin/profile', icon: User },

@@ -40,6 +40,7 @@ function checkAdminHashMode() {
   const adminRoot = document.getElementById('admin-root');
 
   if (isAdminMode) {
+    document.body.classList.add('admin-mode');
     if (header) header.style.setProperty('display', 'none', 'important');
     if (main) main.style.setProperty('display', 'none', 'important');
     if (footer) footer.style.setProperty('display', 'none', 'important');
@@ -47,12 +48,28 @@ function checkAdminHashMode() {
       pageLoader.style.setProperty('display', 'none', 'important');
       pageLoader.classList.add('fade-out');
     }
-    if (adminRoot) adminRoot.style.setProperty('display', 'block', 'important');
+    if (adminRoot) {
+      adminRoot.style.setProperty('display', 'block', 'important');
+      adminRoot.style.setProperty('opacity', '1', 'important');
+      adminRoot.style.setProperty('visibility', 'visible', 'important');
+      adminRoot.style.setProperty('position', 'fixed', 'important');
+      adminRoot.style.setProperty('inset', '0', 'important');
+      adminRoot.style.setProperty('z-index', '999999', 'important');
+      adminRoot.style.setProperty('background-color', '#0f172a', 'important');
+      adminRoot.style.setProperty('overflow-y', 'auto', 'important');
+    }
   } else {
+    document.body.classList.remove('admin-mode');
     if (header) header.style.display = '';
     if (main) main.style.display = '';
     if (footer) footer.style.display = '';
-    if (adminRoot) adminRoot.style.display = 'none';
+    if (adminRoot) {
+      adminRoot.style.setProperty('display', 'none', 'important');
+      adminRoot.style.setProperty('opacity', '0', 'important');
+      adminRoot.style.setProperty('visibility', 'hidden', 'important');
+      adminRoot.style.setProperty('pointer-events', 'none', 'important');
+      adminRoot.style.setProperty('z-index', '-9999', 'important');
+    }
   }
 }
 

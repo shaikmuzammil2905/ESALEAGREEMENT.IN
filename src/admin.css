@@ -9,6 +9,19 @@
   }
 }
 
+#admin-root {
+  display: none !important;
+}
+
+body.admin-mode #admin-root {
+  display: block !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 999999 !important;
+  overflow-y: auto !important;
+  background-color: #0f172a !important;
+}
+
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
   width: 6px;

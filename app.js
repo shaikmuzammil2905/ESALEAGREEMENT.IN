@@ -3,6 +3,7 @@
    ========================================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
+  checkAdminHashMode();
   initPageLoader();
   initStickyHeader();
   initBackToTop();
@@ -16,7 +17,59 @@ document.addEventListener('DOMContentLoaded', () => {
   initFaqAccordion();
   initContactFormValidation();
   initAppDownloadInteractions();
+  fetchDynamicSupabaseWebsiteData();
 });
+
+window.addEventListener('hashchange', checkAdminHashMode);
+
+function checkAdminHashMode() {
+  const isAdminMode = window.location.hash.startsWith('#admin') || window.location.hash.includes('admin') || window.location.pathname.startsWith('/admin');
+  const header = document.querySelector('.site-header');
+  const main = document.querySelector('main');
+  const footer = document.querySelector('footer');
+  const pageLoader = document.querySelector('.page-loader');
+  const adminRoot = document.getElementById('admin-root');
+
+  if (isAdminMode) {
+    if (header) header.style.display = 'none';
+    if (main) main.style.display = 'none';
+    if (footer) footer.style.display = 'none';
+    if (pageLoader) pageLoader.style.display = 'none';
+    if (adminRoot) adminRoot.style.display = 'block';
+  } else {
+    if (header) header.style.display = '';
+    if (main) main.style.display = '';
+    if (footer) footer.style.display = '';
+    if (adminRoot) adminRoot.style.display = 'none';
+  }
+}
+
+/**
+ * Dynamically fetch dynamic CMS and Services data from Supabase if configured
+ */
+async function fetchDynamicSupabaseWebsiteData() {
+  try {
+    const supabaseUrl = 'https://gfvrrhqsqofcflrvxlmk.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdmdnJyaHFzcW9mY2ZscnZ4bG1rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5MDgwNjksImV4cCI6MjEwMTQ4NDA2OX0.ne3ZkXMYiG-eeFUf3681akAk85O3J9wT3apjpugepXg';
+
+    const res = await fetch(`${supabaseUrl}/rest/v1/website_content?select=*`, {
+      headers: { 'apikey': supabaseKey, 'Authorization': `Bearer ${supabaseKey}` }
+    });
+    if (res.ok) {
+      const data = await res.json();
+      data.forEach(item => {
+        if (item.section_key === 'hero' && item.content_json) {
+          const heroTitle = document.querySelector('.hero-title');
+          const heroSub = document.querySelector('.hero-subtitle');
+          if (heroTitle && item.content_json.title) heroTitle.innerHTML = item.content_json.title;
+          if (heroSub && item.content_json.subtitle) heroSub.innerText = item.content_json.subtitle;
+        }
+      });
+    }
+  } catch (e) {
+    // Graceful fallback to static HTML content
+  }
+}
 
 /**
  * Page loading screen transition

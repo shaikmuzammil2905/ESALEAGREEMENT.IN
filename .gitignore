@@ -1,2 +1,6 @@
+node_modules
+dist
+mingit
+download_git.js
 *.log
-.env
+.DS_Store

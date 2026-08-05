@@ -349,10 +349,13 @@ function initCountersCountUp() {
   if (counters.length === 0) return;
 
   const animateCount = (el) => {
-    const countTo = parseFloat(el.getAttribute('data-count'));
+    if (el.dataset.animated) return;
+    el.dataset.animated = 'true';
+
+    const countTo = parseFloat(el.getAttribute('data-count')) || 0;
     const suffix = el.getAttribute('data-suffix') || '';
     const decimals = parseInt(el.getAttribute('data-decimals')) || 0;
-    const duration = 1500; // ms
+    const duration = 1600; // ms
     let startTime = null;
 
     const step = (timestamp) => {
@@ -371,6 +374,13 @@ function initCountersCountUp() {
     window.requestAnimationFrame(step);
   };
 
+  counters.forEach(counter => {
+    const rect = counter.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      animateCount(counter);
+    }
+  });
+
   const counterObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -378,7 +388,7 @@ function initCountersCountUp() {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.2 });
+  }, { threshold: 0.1 });
 
   counters.forEach(counter => counterObserver.observe(counter));
 }

@@ -3316,36 +3316,65 @@ img {
   pointer-events: none !important;
 }
 
-/* Mobile Hamburger Menu Drawer Styles (Image Copy 65) */
+/* Mobile Hamburger Menu & Slide-Down Drawer System */
 @media (max-width: 991px) {
   .site-header {
     position: sticky !important;
     top: 0 !important;
     z-index: 99999 !important;
+    background-color: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
   }
 
+  /* Hamburger Toggle Button */
   .menu-toggle {
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-around !important;
-    width: 34px !important;
-    height: 28px !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
     background: transparent !important;
     border: none !important;
     cursor: pointer !important;
     z-index: 100001 !important;
-    padding: 2px !important;
+    padding: 10px 8px !important;
+    box-sizing: border-box !important;
+    position: relative !important;
   }
 
   .hamburger-line {
     width: 100% !important;
-    height: 3px !important;
+    height: 2.5px !important;
     background-color: #0f172a !important;
     border-radius: 4px !important;
-    transition: all 0.3s ease !important;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, background-color 0.3s ease !important;
     pointer-events: none !important;
+    transform-origin: center !important;
   }
 
+  /* Hamburger to 'X' Transformation when Active */
+  .menu-toggle.is-active .hamburger-line:nth-child(1),
+  .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg) !important;
+    background-color: #2563eb !important;
+  }
+
+  .menu-toggle.is-active .hamburger-line:nth-child(2),
+  .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(2) {
+    opacity: 0 !important;
+    transform: scale(0) !important;
+  }
+
+  .menu-toggle.is-active .hamburger-line:nth-child(3),
+  .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg) !important;
+    background-color: #2563eb !important;
+  }
+
+  /* Mobile Slide-Down Drawer Container */
   .nav-menu {
     position: fixed !important;
     top: 60px !important;
@@ -3354,12 +3383,12 @@ img {
     width: 100vw !important;
     background-color: #ffffff !important;
     border-bottom: 2px solid #e2e8f0 !important;
-    padding: 16px 20px 24px !important;
-    box-shadow: 0 20px 30px rgba(15, 23, 42, 0.18) !important;
-    transform: translateY(-150%) !important;
+    padding: 16px 20px 28px !important;
+    box-shadow: 0 25px 35px rgba(15, 23, 42, 0.2) !important;
+    transform: translateY(-160%) !important;
     opacity: 0 !important;
     visibility: hidden !important;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s ease !important;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, visibility 0.35s ease !important;
     z-index: 100000 !important;
     max-height: calc(100vh - 60px) !important;
     overflow-y: auto !important;
@@ -3390,7 +3419,9 @@ img {
   }
 
   .nav-link {
-    display: block !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
     padding: 14px 18px !important;
     font-size: 16px !important;
     font-weight: 600 !important;
@@ -3398,12 +3429,15 @@ img {
     color: #0f172a !important;
     text-align: left !important;
     background-color: #f8fafc !important;
-    border: 1px solid #f1f5f9 !important;
+    border: 1px solid #e2e8f0 !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    transition: all 0.2s ease !important;
   }
 
-  .nav-link:hover, .nav-link.active {
+  .nav-link:hover, 
+  .nav-link:focus, 
+  .nav-link.active {
     background-color: #eff6ff !important;
     color: #2563eb !important;
     border-color: #bfdbfe !important;

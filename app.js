@@ -198,40 +198,67 @@ function initActiveNavLink() {
 }
 
 /**
- * Mobile Navigation Burger Toggle
+ * Mobile Navigation Burger Toggle System
  */
 function initMobileMenu() {
+  const toggleMenu = (e) => {
+    const toggleBtn = e ? e.target.closest('#menu-toggle, .menu-toggle') : document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    const menuToggleBtn = document.getElementById('menu-toggle') || toggleBtn;
+
+    if (!navMenu || !menuToggleBtn) return;
+
+    const isActive = navMenu.classList.contains('is-active');
+
+    if (isActive) {
+      // Close mobile drawer
+      navMenu.classList.remove('is-active');
+      menuToggleBtn.classList.remove('is-active');
+      menuToggleBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    } else {
+      // Open mobile drawer
+      navMenu.classList.add('is-active');
+      menuToggleBtn.classList.add('is-active');
+      menuToggleBtn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
   document.addEventListener('click', (e) => {
     const toggleBtn = e.target.closest('#menu-toggle, .menu-toggle');
     const navMenu = document.getElementById('nav-menu');
-    
+
     if (toggleBtn && navMenu) {
       e.preventDefault();
       e.stopPropagation();
-      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-      toggleBtn.setAttribute('aria-expanded', !isExpanded);
-      navMenu.classList.toggle('is-active');
-      document.body.style.overflow = !isExpanded ? 'hidden' : '';
-    } else {
-      const activeNavMenu = document.querySelector('#nav-menu.is-active');
-      if (activeNavMenu && !e.target.closest('#nav-menu')) {
-        activeNavMenu.classList.remove('is-active');
-        const menuToggle = document.getElementById('menu-toggle');
-        if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
+      toggleMenu(e);
+      return;
+    }
+
+    // Close when tapping outside the menu drawer
+    if (navMenu && navMenu.classList.contains('is-active') && !e.target.closest('#nav-menu')) {
+      navMenu.classList.remove('is-active');
+      const menuToggleBtn = document.getElementById('menu-toggle');
+      if (menuToggleBtn) {
+        menuToggleBtn.classList.remove('is-active');
+        menuToggleBtn.setAttribute('aria-expanded', 'false');
       }
+      document.body.style.overflow = '';
     }
   });
 
-  // Close drawer when any nav link is tapped
-  const navLinks = document.querySelectorAll('.nav-link, .nav-btn');
-  navLinks.forEach(link => {
+  // Automatically close menu when any navigation link is clicked
+  document.querySelectorAll('.nav-link, .nav-btn').forEach(link => {
     link.addEventListener('click', () => {
       const navMenu = document.getElementById('nav-menu');
-      const menuToggle = document.getElementById('menu-toggle');
+      const menuToggleBtn = document.getElementById('menu-toggle');
       if (navMenu && navMenu.classList.contains('is-active')) {
         navMenu.classList.remove('is-active');
-        if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+        if (menuToggleBtn) {
+          menuToggleBtn.classList.remove('is-active');
+          menuToggleBtn.setAttribute('aria-expanded', 'false');
+        }
         document.body.style.overflow = '';
       }
     });

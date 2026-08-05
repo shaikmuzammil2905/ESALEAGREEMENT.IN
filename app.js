@@ -197,27 +197,38 @@ function initActiveNavLink() {
  * Mobile Navigation Burger Toggle
  */
 function initMobileMenu() {
-  const menuToggle = document.getElementById('menu-toggle');
-  const navMenu = document.getElementById('nav-menu');
-  const navLinks = document.querySelectorAll('.nav-link');
-
-  if (!menuToggle || !navMenu) return;
-
-  const toggleMenu = () => {
-    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-    menuToggle.setAttribute('aria-expanded', !isExpanded);
-    navMenu.classList.toggle('is-active');
+  document.addEventListener('click', (e) => {
+    const toggleBtn = e.target.closest('#menu-toggle, .menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
     
-    // Lock background scrolling on active menu
-    document.body.style.overflow = !isExpanded ? 'hidden' : '';
-  };
+    if (toggleBtn && navMenu) {
+      e.preventDefault();
+      e.stopPropagation();
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', !isExpanded);
+      navMenu.classList.toggle('is-active');
+      document.body.style.overflow = !isExpanded ? 'hidden' : '';
+    } else {
+      const activeNavMenu = document.querySelector('#nav-menu.is-active');
+      if (activeNavMenu && !e.target.closest('#nav-menu')) {
+        activeNavMenu.classList.remove('is-active');
+        const menuToggle = document.getElementById('menu-toggle');
+        if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+    }
+  });
 
-  menuToggle.addEventListener('click', toggleMenu);
-
+  // Close drawer when any nav link is tapped
+  const navLinks = document.querySelectorAll('.nav-link, .nav-btn');
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
-      if (navMenu.classList.contains('is-active')) {
-        toggleMenu();
+      const navMenu = document.getElementById('nav-menu');
+      const menuToggle = document.getElementById('menu-toggle');
+      if (navMenu && navMenu.classList.contains('is-active')) {
+        navMenu.classList.remove('is-active');
+        if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
       }
     });
   });

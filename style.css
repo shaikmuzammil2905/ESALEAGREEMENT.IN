@@ -3343,6 +3343,7 @@ img {
     background-color: #0f172a !important;
     border-radius: 4px !important;
     transition: all 0.3s ease !important;
+    pointer-events: none !important;
   }
 
   .nav-menu {

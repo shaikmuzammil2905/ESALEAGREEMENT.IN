@@ -495,34 +495,38 @@ function initCardHoverEffect() {
  * Accordion Expand/Collapse logic in 'faq.html'
  */
 function initFaqAccordion() {
-  const faqItems = document.querySelectorAll('.faq-item');
-  if (faqItems.length === 0) return;
+  document.addEventListener('click', (e) => {
+    const header = e.target.closest('.faq-header');
+    if (!header) return;
 
-  faqItems.forEach(item => {
-    const header = item.querySelector('.faq-header');
-    const body = item.querySelector('.faq-body');
+    e.preventDefault();
+    e.stopPropagation();
 
-    header.addEventListener('click', () => {
-      const isActive = item.classList.contains('active');
-      
-      // Close all other items
-      faqItems.forEach(otherItem => {
-        if (otherItem !== item) {
-          otherItem.classList.remove('active');
-          otherItem.querySelector('.faq-body').style.maxHeight = null;
-        }
-      });
+    const item = header.closest('.faq-item');
+    if (!item) return;
 
-      // Toggle current item
-      if (isActive) {
-        item.classList.remove('active');
-        body.style.maxHeight = null;
-      } else {
-        item.classList.add('active');
-        body.style.maxHeight = body.scrollHeight + 'px';
+    const isActive = item.classList.contains('active');
+
+    // Close all other FAQ items
+    document.querySelectorAll('.faq-item').forEach(otherItem => {
+      if (otherItem !== item) {
+        otherItem.classList.remove('active');
       }
     });
+
+    // Toggle current item active class
+    if (isActive) {
+      item.classList.remove('active');
+    } else {
+      item.classList.add('active');
+    }
   });
+
+  // Ensure first FAQ item is active by default
+  const firstItem = document.querySelector('.faq-item');
+  if (firstItem) {
+    firstItem.classList.add('active');
+  }
 }
 
 /**

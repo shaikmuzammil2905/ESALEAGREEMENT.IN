@@ -84,15 +84,21 @@ function initPageLoader() {
   const loader = document.querySelector('.page-loader');
   if (!loader) return;
 
+  const hideLoader = () => {
+    loader.classList.add('fade-out');
+    loader.style.setProperty('display', 'none', 'important');
+    loader.style.setProperty('opacity', '0', 'important');
+    loader.style.setProperty('pointer-events', 'none', 'important');
+  };
+
   const isAdminMode = window.location.hash.toLowerCase().includes('admin') || window.location.pathname.toLowerCase().includes('admin');
   if (isAdminMode) {
-    loader.style.setProperty('display', 'none', 'important');
+    hideLoader();
     return;
   }
 
-  setTimeout(() => {
-    loader.classList.add('fade-out');
-  }, 250);
+  setTimeout(hideLoader, 150);
+  window.addEventListener('load', hideLoader);
 }
 
 /**

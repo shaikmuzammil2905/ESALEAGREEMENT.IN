@@ -3285,3 +3285,23 @@ img {
   transform: translateX(40px) scale(0.9) rotate(2deg) !important;
   animation: none !important;
 }
+
+/* Page Loader Overlay Transitions */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.page-loader.fade-out {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  display: none !important;
+}

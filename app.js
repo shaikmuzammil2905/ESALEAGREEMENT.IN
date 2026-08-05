@@ -25,7 +25,13 @@ window.addEventListener('hashchange', checkAdminHashMode);
 function checkAdminHashMode() {
   const hash = window.location.hash.toLowerCase();
   const pathname = window.location.pathname.toLowerCase();
-  const isAdminMode = hash.includes('admin') || pathname.includes('admin');
+  
+  // STRICT ADMIN MODE: Only trigger if hash is #admin / #/admin or pathname is /admin
+  const isAdminMode = hash === '#admin' || 
+                      hash.startsWith('#/admin') || 
+                      hash.startsWith('#admin/') || 
+                      pathname === '/admin' || 
+                      pathname === '/admin/';
 
   const header = document.querySelector('.site-header');
   const main = document.querySelector('main');
@@ -91,7 +97,9 @@ function initPageLoader() {
     loader.style.setProperty('pointer-events', 'none', 'important');
   };
 
-  const isAdminMode = window.location.hash.toLowerCase().includes('admin') || window.location.pathname.toLowerCase().includes('admin');
+  const hash = window.location.hash.toLowerCase();
+  const pathname = window.location.pathname.toLowerCase();
+  const isAdminMode = hash === '#admin' || hash.startsWith('#/admin') || hash.startsWith('#admin/') || pathname === '/admin' || pathname === '/admin/';
   if (isAdminMode) {
     hideLoader();
     return;

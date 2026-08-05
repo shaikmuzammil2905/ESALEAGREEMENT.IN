@@ -51,8 +51,8 @@ export default function App() {
           </Route>
         </Route>
 
-        {/* Default Fallback redirect to admin dashboard */}
-        <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
+        {/* Default Fallback */}
+        <Route path="*" element={null} />
       </Routes>
     </AuthProvider>
   );

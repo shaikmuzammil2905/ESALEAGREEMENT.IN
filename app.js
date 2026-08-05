@@ -23,7 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('hashchange', checkAdminHashMode);
 
 function checkAdminHashMode() {
-  const isAdminMode = window.location.hash.startsWith('#admin') || window.location.hash.includes('admin') || window.location.pathname.startsWith('/admin');
+  const hash = window.location.hash.toLowerCase();
+  const pathname = window.location.pathname.toLowerCase();
+  const isAdminMode = hash.includes('admin') || pathname.includes('admin');
+
   const header = document.querySelector('.site-header');
   const main = document.querySelector('main');
   const footer = document.querySelector('footer');
@@ -31,11 +34,14 @@ function checkAdminHashMode() {
   const adminRoot = document.getElementById('admin-root');
 
   if (isAdminMode) {
-    if (header) header.style.display = 'none';
-    if (main) main.style.display = 'none';
-    if (footer) footer.style.display = 'none';
-    if (pageLoader) pageLoader.style.display = 'none';
-    if (adminRoot) adminRoot.style.display = 'block';
+    if (header) header.style.setProperty('display', 'none', 'important');
+    if (main) main.style.setProperty('display', 'none', 'important');
+    if (footer) footer.style.setProperty('display', 'none', 'important');
+    if (pageLoader) {
+      pageLoader.style.setProperty('display', 'none', 'important');
+      pageLoader.classList.add('fade-out');
+    }
+    if (adminRoot) adminRoot.style.setProperty('display', 'block', 'important');
   } else {
     if (header) header.style.display = '';
     if (main) main.style.display = '';
@@ -78,7 +84,12 @@ function initPageLoader() {
   const loader = document.querySelector('.page-loader');
   if (!loader) return;
 
-  // Add delay to prevent screen flicker and show premium feel
+  const isAdminMode = window.location.hash.toLowerCase().includes('admin') || window.location.pathname.toLowerCase().includes('admin');
+  if (isAdminMode) {
+    loader.style.setProperty('display', 'none', 'important');
+    return;
+  }
+
   setTimeout(() => {
     loader.classList.add('fade-out');
   }, 250);

@@ -60,6 +60,31 @@ body {
   overflow-x: hidden;
 }
 
+/* Enforce 100% bright white theme for public site */
+body:not(.admin-mode) {
+  background-color: #ffffff !important;
+  color: #475569 !important;
+}
+
+body:not(.admin-mode) .hero-section {
+  background-color: #ffffff !important;
+  background: radial-gradient(circle at 85% 20%, rgba(37, 99, 235, 0.05) 0%, #ffffff 60%),
+              radial-gradient(circle at 15% 80%, rgba(16, 185, 129, 0.04) 0%, #ffffff 50%) !important;
+}
+
+body:not(.admin-mode) .hero-title {
+  color: #0f172a !important;
+}
+
+body:not(.admin-mode) .hero-subtitle {
+  color: #475569 !important;
+}
+
+body:not(.admin-mode) .site-header {
+  background-color: rgba(255, 255, 255, 0.96) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
   color: var(--color-text-dark);

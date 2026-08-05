@@ -140,23 +140,25 @@ export default function Dashboard() {
   return (
     <div className="space-y-8 animate-in fade-in duration-300">
       {/* Header Banner */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border border-slate-800 p-6 rounded-3xl text-white shadow-xl relative overflow-hidden">
-        <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-gradient-to-l from-emerald-500/10 to-transparent pointer-events-none"></div>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-gradient-to-r from-indigo-950 via-violet-900 to-teal-900 border border-indigo-700/40 p-6 rounded-3xl text-white shadow-2xl relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(16,185,129,0.18)_0%,transparent_60%)] pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(99,102,241,0.2)_0%,transparent_60%)] pointer-events-none"></div>
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-400/30 to-transparent pointer-events-none"></div>
         <div className="space-y-1 z-10">
           <div className="flex items-center space-x-2">
-            <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider border border-emerald-500/30">
+            <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/25 text-emerald-300 text-xs font-semibold uppercase tracking-wider border border-emerald-500/40">
               Live Overview
             </span>
-            <span className="text-slate-400 text-xs">• Real-time Metrics</span>
+            <span className="text-indigo-200/60 text-xs">• Real-time Metrics</span>
           </div>
-          <h1 className="text-2xl lg:text-3xl font-extrabold tracking-tight">System Admin Dashboard</h1>
-          <p className="text-slate-400 text-sm">Welcome back! Manage content, users, and agreements seamlessly.</p>
+          <h1 className="text-2xl lg:text-3xl font-extrabold tracking-tight text-white">System Admin Dashboard</h1>
+          <p className="text-indigo-200/70 text-sm">Welcome back! Manage content, users, and agreements seamlessly.</p>
         </div>
 
         <div className="flex items-center space-x-3 z-10">
           <a
             href="#/admin/services"
-            className="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold rounded-xl text-sm transition shadow-lg flex items-center space-x-2"
+            className="px-4 py-2.5 bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold rounded-xl text-sm transition shadow-lg shadow-emerald-500/30 flex items-center space-x-2"
           >
             <Plus className="w-4 h-4" />
             <span>Add Service</span>

@@ -3546,7 +3546,10 @@ img {
   box-shadow: 0 14px 28px -4px rgba(37, 99, 235, 0.14);
 }
 
-/* FAQ Accordion Styles (Image Copy 61) */
+/* =======================================================
+   FAQ Accordion — Full Responsive Styles
+   Answers visible on click (max-height animation)
+   ======================================================= */
 .faq-accordion {
   display: flex;
   flex-direction: column;
@@ -3559,14 +3562,18 @@ img {
   border: 1px solid #e2e8f0;
   border-radius: 16px;
   background-color: #ffffff;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .faq-item:hover {
   border-color: #93c5fd;
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
+}
+
+.faq-item.active {
+  border-color: #2563eb;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.12);
 }
 
 .faq-header {
@@ -3584,6 +3591,7 @@ img {
   text-align: left;
   cursor: pointer;
   gap: 16px;
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .faq-header * {
@@ -3592,13 +3600,15 @@ img {
 
 .faq-item.active .faq-header {
   color: #2563eb;
-  background-color: #f8fafc;
+  background-color: #f0f7ff;
+  border-radius: 16px 16px 0 0;
 }
 
 .faq-icon-chevron {
-  transition: transform 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
   color: #64748b;
+  min-width: 20px;
 }
 
 .faq-item.active .faq-icon-chevron {
@@ -3606,20 +3616,40 @@ img {
   color: #2563eb;
 }
 
+/* Answer body — hidden by default, smooth max-height reveal */
 .faq-body {
-  display: none !important;
-  padding: 0 24px 24px 24px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+              padding 0.3s ease;
+  padding: 0 24px;
   background-color: #ffffff;
 }
 
 .faq-item.active .faq-body {
-  display: block !important;
+  max-height: 600px;
+  padding: 0 24px 28px 24px;
 }
 
 .faq-content {
   font-size: 15px;
   color: #475569;
-  line-height: 1.7;
-  padding-top: 12px;
-  border-top: 1px dashed #e2e8f0;
+  line-height: 1.8;
+  padding-top: 16px;
+  border-top: 1px dashed #dbeafe;
+}
+
+/* Mobile responsive FAQ */
+@media (max-width: 640px) {
+  .faq-header {
+    font-size: 15px;
+    padding: 18px 16px;
+  }
+  .faq-item.active .faq-body {
+    padding: 0 16px 22px 16px;
+  }
+  .faq-content {
+    font-size: 14px;
+    line-height: 1.7;
+  }
 }

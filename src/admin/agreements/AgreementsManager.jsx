@@ -4,7 +4,7 @@ import { logActivity } from '../../utils/activityLogger';
 import { TableSkeleton } from '../../components/Skeleton';
 import ConfirmModal from '../../components/ConfirmModal';
 import { useAuth } from '../../context/AuthContext';
-import { Search, Download, Trash2, ExternalLink, Filter, Edit, FileText, CheckCircle } from 'lucide-react';
+import { Search, Download, Trash2, ExternalLink, Filter, Edit, FileText, CheckCircle, Eye } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const INITIAL_AGREEMENTS = [
@@ -22,6 +22,7 @@ export default function AgreementsManager() {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [deleteModal, setDeleteModal] = useState({ open: false, id: null, name: '' });
+  const [selectedAg, setSelectedAg] = useState(null);
 
   useEffect(() => {
     fetchAgreements();
@@ -207,30 +208,115 @@ export default function AgreementsManager() {
                         {new Date(ag.created_date).toLocaleDateString()}
                       </td>
                       <td className="p-4 text-right space-x-2">
-                        {ag.pdf_file_url ? (
-                          <a
-                            href={ag.pdf_file_url}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="p-2 text-emerald-500 hover:text-emerald-400 inline-block"
-                            title="Download / View PDF"
+                          <button
+                            onClick={() => setSelectedAg(ag)}
+                            className="p-2 text-emerald-500 hover:text-emerald-400 transition"
+                            title="View Full Details"
                           >
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
-                        ) : null}
-                        <button
-                          onClick={() => setDeleteModal({ open: true, id: ag.id, name: ag.customer_name })}
-                          className="p-2 text-slate-600 dark:text-slate-300 hover:text-red-500 transition"
-                          title="Delete Agreement"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </td>
+                            <Eye className="w-4 h-4" />
+                          </button>
+                          {ag.pdf_file_url ? (
+                            <a
+                              href={ag.pdf_file_url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="p-2 text-blue-500 hover:text-blue-400 inline-block"
+                              title="Download / View PDF"
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                            </a>
+                          ) : null}
+                          <button
+                            onClick={() => setDeleteModal({ open: true, id: ag.id, name: ag.customer_name })}
+                            className="p-2 text-slate-600 dark:text-slate-300 hover:text-red-500 transition"
+                            title="Delete Agreement"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </td>
                     </tr>
                   ))
                 )}
               </tbody>
             </table>
+          </div>
+        </div>
+      )}
+
+      {/* Agreement Details Modal */}
+      {selectedAg && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-xl w-full p-6 shadow-2xl space-y-5 my-8">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-600 text-white flex items-center justify-center font-bold text-lg shadow-lg">
+                  <FileText className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">Agreement Details</h3>
+                  <p className="text-xs text-slate-400">Client submission for {selectedAg.customer_name}</p>
+                </div>
+              </div>
+              <button onClick={() => setSelectedAg(null)} className="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 space-y-1">
+                <span className="text-xs uppercase font-bold text-slate-400 tracking-wider">Customer Name</span>
+                <p className="font-bold text-slate-900 dark:text-white text-base">{selectedAg.customer_name}</p>
+              </div>
+              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 space-y-1">
+                <span className="text-xs uppercase font-bold text-slate-400 tracking-wider">Agreement Type</span>
+                <p className="font-semibold text-slate-900 dark:text-white">{selectedAg.agreement_type}</p>
+              </div>
+              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 space-y-1">
+                <span className="text-xs uppercase font-bold text-slate-400 tracking-wider">Email</span>
+                <p className="font-semibold text-blue-600 dark:text-blue-400 break-all">{selectedAg.email}</p>
+              </div>
+              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 space-y-1">
+                <span className="text-xs uppercase font-bold text-slate-400 tracking-wider">Phone</span>
+                <p className="font-semibold text-slate-900 dark:text-white">{selectedAg.phone || 'N/A'}</p>
+              </div>
+              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 space-y-1">
+                <span className="text-xs uppercase font-bold text-slate-400 tracking-wider">Status</span>
+                <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold capitalize ${
+                  selectedAg.status === 'completed' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400' :
+                  selectedAg.status === 'verified' ? 'bg-blue-100 text-blue-700 dark:bg-blue-950/60 dark:text-blue-400' :
+                  selectedAg.status === 'draft' ? 'bg-slate-200 text-slate-600 dark:bg-slate-800 dark:text-slate-400' :
+                  'bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-400'
+                }`}>{selectedAg.status}</span>
+              </div>
+              <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 space-y-1">
+                <span className="text-xs uppercase font-bold text-slate-400 tracking-wider">Created Date</span>
+                <p className="font-semibold text-slate-900 dark:text-white">{new Date(selectedAg.created_date).toLocaleString('en-IN', { dateStyle: 'long', timeStyle: 'short' })}</p>
+              </div>
+            </div>
+
+            <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3 flex-wrap">
+              <button
+                onClick={() => {
+                  setDeleteModal({ open: true, id: selectedAg.id, name: selectedAg.customer_name });
+                  setSelectedAg(null);
+                }}
+                className="px-4 py-2 bg-red-50 hover:bg-red-100 dark:bg-red-950/30 text-red-600 dark:text-red-400 font-bold rounded-xl text-sm flex items-center space-x-2 transition border border-red-200 dark:border-red-800"
+              >
+                <Trash2 className="w-4 h-4" />
+                <span>Delete</span>
+              </button>
+              <div className="flex items-center space-x-2">
+                {selectedAg.pdf_file_url && (
+                  <a href={selectedAg.pdf_file_url} target="_blank" rel="noreferrer" className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl text-sm flex items-center space-x-2 transition shadow-md">
+                    <ExternalLink className="w-4 h-4" />
+                    <span>View PDF</span>
+                  </a>
+                )}
+                <button onClick={() => setSelectedAg(null)} className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-xl text-sm transition">
+                  Close
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}

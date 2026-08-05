@@ -33,6 +33,10 @@ function checkAdminHashMode() {
                       pathname === '/admin' || 
                       pathname === '/admin/';
 
+  if (hash === '#admin') {
+    window.location.hash = '#/admin/dashboard';
+  }
+
   const header = document.querySelector('.site-header');
   const main = document.querySelector('main');
   const footer = document.querySelector('footer');

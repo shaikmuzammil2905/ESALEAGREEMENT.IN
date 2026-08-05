@@ -27,6 +27,10 @@ export default function App() {
     <AuthProvider>
       <Toaster position="top-right" toastOptions={{ duration: 4000 }} />
       <Routes>
+        {/* Direct redirects for bare admin routes */}
+        <Route path="/" element={<Navigate to="/admin/dashboard" replace />} />
+        <Route path="admin" element={<Navigate to="/admin/dashboard" replace />} />
+
         {/* Admin Authentication Routes */}
         <Route path="/admin/login" element={<Login />} />
         <Route path="/admin/forgot-password" element={<ForgotPassword />} />
@@ -51,8 +55,8 @@ export default function App() {
           </Route>
         </Route>
 
-        {/* Default Fallback */}
-        <Route path="*" element={null} />
+        {/* Fallback to dashboard */}
+        <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
       </Routes>
     </AuthProvider>
   );

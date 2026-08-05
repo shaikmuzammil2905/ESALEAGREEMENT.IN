@@ -3387,4 +3387,102 @@ img {
     text-align: center;
     display: block;
   }
+
+  /* Mobile Metrics Alignment (Image Copy 64) */
+  .metrics-row-saas {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+
+  .metric-item {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 14px !important;
+    width: 100% !important;
+    padding: 10px 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  .metric-number {
+    font-size: 26px !important;
+    white-space: nowrap !important;
+    font-weight: 800 !important;
+  }
+
+  .metric-label {
+    font-size: 13px !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* FAQ Accordion Styles (Image Copy 61) */
+.faq-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background-color: var(--color-white);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.faq-item:hover {
+  border-color: #cbd5e1;
+  box-shadow: var(--shadow-md);
+}
+
+.faq-header {
+  width: 100%;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  text-align: left;
+  cursor: pointer;
+  gap: 16px;
+}
+
+.faq-item.active .faq-header {
+  color: var(--color-primary);
+}
+
+.faq-icon-chevron {
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.faq-item.active .faq-icon-chevron {
+  transform: rotate(180deg);
+}
+
+.faq-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease-in-out;
+}
+
+.faq-item.active .faq-body {
+  max-height: 500px !important;
+}
+
+.faq-content {
+  padding: 0 24px 20px 24px;
+  font-size: 15px;
+  color: var(--color-text-body);
+  line-height: 1.6;
 }
